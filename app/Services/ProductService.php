@@ -19,6 +19,24 @@ class ProductService
     return $this->productRepository->getAll();
   }
 
+  public function getFiltered(array $params): Collection {
+    if(isset($params['mip']) && isset($params['map'])) {
+      $products = $this->productRepository->getByPrice($params["mip"],$params["map"]);
+    }
+    else if(isset($params['mip']) && !isset($params['map']))
+    {
+      $products = $this->productRepository->getWhenMinPrice($params["mip"]);
+    }
+    else if(isset($params['map']) && !isset($params['mip']))
+    {
+      $products = $this->productRepository->getWhenMaxPrice($params["map"]);
+    }
+    else {
+      $products = $this->productRepository->getAll();
+    }
+    return $products;
+  }
+
   public function create(array $attributes): Product {
     $attributes = Arr::only($attributes,['name','description','price','image']);
     $path = (is_string($attributes['image'])) ? $attributes['image'] : $attributes['image']->store("products");

@@ -22,6 +22,12 @@ class ProductController extends Controller
         return view("pages.products.index",['products' => $products]);
     }
 
+    public function filter(Request $request) {
+        $params = $request->all();
+        $products = $this->productService->getFiltered($params);
+        return view("pages.products.index",['products' => $products]);
+    }
+
     public function create() {
         return view("pages.products.create");
     }

@@ -1,6 +1,24 @@
 @extends("app")
 @section("content")
 <h1 class="mb-3">List of products</h1>
+<form action="{{route('products.filter')}}" method="GET">
+  <div class="row">
+    <div class="col-sm-2">
+      <h3>Filter by price</h3>
+    </div>
+    <div class="col-sm-2">
+      <input type="number" step="0.01" class="form-control" name="mip" placeholder="min">
+    </div>
+    <div class="col-sm-2">
+      <input type="number" step="0.01" class="form-control" name="map" placeholder="max">
+    </div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-primary">
+        filter
+      </button>
+    </div>
+  </div>
+</form>
 <table class="table">
   <thead>
     <tr>
