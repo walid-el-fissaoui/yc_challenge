@@ -11,9 +11,20 @@
     @error('price')
       <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="file" accept="image/*" name="image" id="imageField" placeholder="Image" class="form-control mb-3">
+    <input type="file" accept="image/*" name="image" id="imageField" placeholder="Image" class="form-control mb-3 @error('image') is-invalid @enderror">
+    @error('image')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     <textarea name="description" id="descriptionField" placeholder="Description" class="form-control mb-3 @error('description') is-invalid @enderror" value="{{old('description')}}" cols="30" rows="5" ></textarea>
     @error('description')
+      <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <select name="category" class="form-control mb-3 @error('category') is-invalid @enderror" id="categoryField">
+      @foreach ($categories as $category)
+      <option value="{{$category->id}}">{{$category->name}}</option>
+      @endforeach
+    </select>
+    @error('category')
       <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <button type="submit" class="btn btn-primary">Submit</button>

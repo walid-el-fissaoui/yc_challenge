@@ -26,7 +26,8 @@ class ProductRepository
   }
 
   public function create(array $attributes): Product {
-    $attributes = Arr::only($attributes,['name','description','price','image']);
+    $attributes["category_id"] = $attributes["category"];
+    $attributes = Arr::only($attributes,['name','description','price','image','category_id']);
     return Product::query()->create($attributes);
   }
 }
