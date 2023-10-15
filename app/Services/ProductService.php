@@ -16,7 +16,7 @@ class ProductService
   }
 
   public function getAll(): Collection {
-    return $this->productRepository->getAll();
+    return $this->productRepository->products()->withCategory()->getAll();
   }
 
   public function getFiltered(array $params): Collection {
