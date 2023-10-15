@@ -6,6 +6,7 @@ use App\Repositories\ProductRepository;
 use App\Services\ProductService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class ProductCommand extends Command
 {
@@ -14,7 +15,7 @@ class ProductCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'product:new {name} {description} {price}';
+    protected $signature = 'product:new {name} {description} {price} {image}';
 
     /**
      * The console command description.
@@ -46,9 +47,15 @@ class ProductCommand extends Command
     public function handle()
     {
         $attributes = Arr::except($this->arguments(),["command"]);
-        $attributes['image'] = "";
-        $product = $this->productService->create($attributes);
-        dd($product);
-        $this->info('Your product has beend created succesfully.');
+        try {
+            $path = Storage::putFile("products",$attributes['image']);
+        } catch (\Throwable $th) {
+            $this->error('Impossible to find your file');
+        }
+        if(isset($path)) {
+            $attributes['image'] = $path;
+            $product = $this->productService->create($attributes);
+            $this->info('Your product has beend created succesfully.');
+        }
     }
 }
