@@ -15,7 +15,9 @@ class ProductService
   }
 
   public function create(array $attributes): Product {
-    $attributes = Arr::only($attributes,['name','description','price']);
+    $attributes = Arr::only($attributes,['name','description','price','image']);
+    $path = $attributes['image']->store("products");
+    $attributes['image'] = $path;
     return $this->productRepository->create($attributes);
   }
 }

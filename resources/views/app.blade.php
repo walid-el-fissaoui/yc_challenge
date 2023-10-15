@@ -10,6 +10,13 @@
 </head>
 <body>
     <div class="container my-5">
+        @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span>{{ session('status') }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         @yield("content")
     </div>
 </body>
