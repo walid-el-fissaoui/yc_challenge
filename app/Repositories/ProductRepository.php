@@ -17,20 +17,33 @@ class ProductRepository
     $this->products = Collect([]);
   }
 
-  public function getByPrice(float $min,float $max): Collection {
-    return Product::whereBetween('price',[$min,$max])->get();
+  public function whereMinPrice(float $price) {
+    $this->products = $this->products->where('price','>=',$price);
+    return $this;
   }
 
-  public function getWhenMinPrice(float $price): Collection {
-    return Product::where('price','>=',$price)->get();
+  public function whereMaxPrice(float $price) {
+    $this->products = $this->products->where('price','<=',$price);
+    return $this;
   }
 
-  public function getWhenMaxPrice(float $price): Collection {
-    return Product::where('price','<=',$price)->get();
+  public function whereCategory(int $category) {
+    $products = Product::from("products as p")
+    ->select("p.*")
+    ->join("category_product as cp","cp.product_id","=",'p.id')
+    ->where("cp.category_id",$category)
+    ->get();
+    $this->products = $products;
+    return $this;
   }
 
-  public function products() {
-    $this->products = Product::query()->get();
+  public function products(Collection $products = null) {
+    if(isset($product)) {
+      $this->products = $products;
+    }
+    else {
+      $this->products = Product::query()->get();
+    }
     return $this;
   }
 

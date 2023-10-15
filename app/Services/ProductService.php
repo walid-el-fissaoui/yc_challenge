@@ -20,20 +20,13 @@ class ProductService
   }
 
   public function getFiltered(array $params): Collection {
-    if(isset($params['mip']) && isset($params['map'])) {
-      $products = $this->productRepository->getByPrice($params["mip"],$params["map"]);
-    }
-    else if(isset($params['mip']) && !isset($params['map']))
-    {
-      $products = $this->productRepository->getWhenMinPrice($params["mip"]);
-    }
-    else if(isset($params['map']) && !isset($params['mip']))
-    {
-      $products = $this->productRepository->getWhenMaxPrice($params["map"]);
-    }
-    else {
-      $products = $this->productRepository->getAll();
-    }
+    $products = $this->productRepository->products()->getAll();
+    if(isset($params['mip']))
+    $products = $this->productRepository->products($products)->whereMinPrice($params["mip"])->withCategory()->getAll();
+    if(isset($params['map']))
+    $products = $this->productRepository->products($products)->whereMaxPrice($params["map"])->withCategory()->getAll();
+    if(isset($params['cat']) && $params['cat'] != 0)
+    $products = $this->productRepository->products($products)->whereCategory($params["cat"])->withCategory()->getAll();
     return $products;
   }
 

@@ -12,6 +12,14 @@
     <div class="col-sm-2">
       <input type="number" step="0.01" class="form-control" name="map" placeholder="max">
     </div>
+    <div class="col-sm-3">
+      <select name="cat" class="form-control">
+        <option value="0"></option>
+        @foreach ($categories as $category)
+        <option value="{{$category->id}}">{{$category->name}}</option>
+        @endforeach
+      </select>
+    </div>
     <div class="col-sm-2">
       <button type="submit" class="btn btn-primary">
         filter

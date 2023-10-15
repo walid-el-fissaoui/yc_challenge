@@ -25,13 +25,15 @@ class ProductController extends Controller
 
     public function index() {
         $products = $this->productService->getAll();
-        return view("pages.products.index",['products' => $products]);
+        $categories = $this->categoryService->getAll();
+        return view("pages.products.index",['products' => $products,'categories' => $categories]);
     }
 
     public function filter(Request $request) {
         $params = $request->all();
         $products = $this->productService->getFiltered($params);
-        return view("pages.products.index",['products' => $products]);
+        $categories = $this->categoryService->getAll();
+        return view("pages.products.index",['products' => $products,'categories' => $categories]);
     }
 
     public function create() {
