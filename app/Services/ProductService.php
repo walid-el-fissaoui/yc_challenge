@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class ProductService
 {
@@ -12,6 +13,10 @@ class ProductService
 
   public function __construct(ProductRepository $productRepository) {
     $this->productRepository = $productRepository;
+  }
+
+  public function getAll(): Collection {
+    return $this->productRepository->getAll();
   }
 
   public function create(array $attributes): Product {
