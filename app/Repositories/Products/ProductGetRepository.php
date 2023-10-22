@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\DB;
 class ProductGetRepository
 {
   private $products;
-
-  public function __construct() {
+  private ProductCategoryRepository $productCategoryRepository;
+  public function __construct(ProductCategoryRepository $productCategoryRepository) {
+    $this->productCategoryRepository = $productCategoryRepository;
     $this->products = Collect([]);
   }
 
@@ -35,7 +36,7 @@ class ProductGetRepository
   }
 
   public function products(Collection $products = null) {
-    if(isset($product)) {
+    if(isset($products)) {
       $this->products = $products;
     }
     else {
@@ -44,12 +45,9 @@ class ProductGetRepository
     return $this;
   }
 
-  public function withCategory() {
+  public function withCategoryName() {
     $this->products = $this->products->map(function($product) {
-      $result =  DB::select("SELECT c.name FROM categories c, category_product cp WHERE c.id = cp.category_id AND cp.product_id = ?",[$product->id]);
-      if(count($result) > 0) {
-        $product['category'] = $result[0]->name;
-      }
+      $product['category'] = $this->productCategoryRepository->getCategoryName($product);
       return $product;
     });
     return $this;

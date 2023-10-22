@@ -8,7 +8,7 @@ use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Services\Products\ProductService;
 
-class StoreController extends Controller
+class ProductStoreController extends Controller
 {
   private ProductService $productService;
   public function __construct(ProductService $productService) {

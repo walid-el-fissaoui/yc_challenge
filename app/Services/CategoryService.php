@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Category;
 use App\Repositories\CategoryRepository;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class CategoryService

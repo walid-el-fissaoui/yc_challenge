@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Products\CreateController;
-use App\Http\Controllers\Products\StoreController;
+use App\Http\Controllers\Products\ProductCreateController;
+use App\Http\Controllers\Products\ProductGetController;
+use App\Http\Controllers\Products\ProductStoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProductController::class,"index"])->name("products.index");
-Route::get('/products', [ProductController::class,"filter"])->name("products.filter");
-Route::get('/products/create', [CreateController::class,"create"])->name("products.create");
-Route::post('/products/create', [StoreController::class,"store"])->name("products.store");
+Route::get('/', [ProductGetController::class,"index"])->name("products.index");
+Route::get('/products', [ProductGetController::class,"filter"])->name("products.filter");
+Route::get('/products/create', [ProductCreateController::class,"create"])->name("products.create");
+Route::post('/products/create', [ProductStoreController::class,"store"])->name("products.store");
