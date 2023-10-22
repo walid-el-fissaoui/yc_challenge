@@ -21,7 +21,7 @@
     @enderror
     <select name="category" class="form-control mb-3 @error('category') is-invalid @enderror" id="categoryField">
       @foreach ($categories as $category)
-      <option value="{{$category->id}}">{{$category->name}}</option>
+      <option value="{{$category->getId()}}">{{$category->getName()}}</option>
       @endforeach
     </select>
     @error('category')

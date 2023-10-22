@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Products;
 
-use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class ProductRepository
+class ProductGetRepository
 {
-
   private $products;
 
   public function __construct() {
@@ -60,17 +57,5 @@ class ProductRepository
 
   public function getAll(): Collection {
     return $this->products;
-  }
-
-  public function create(array $attributes): Product {
-    $category = $attributes['category'];
-    $attributes = Arr::only($attributes,['name','description','price','image']);
-    $product = Product::query()->create($attributes);
-    $this->appendToCategory($category,$product);
-    return $product;
-  }
-
-  public function appendToCategory(int $category, Product $product) {
-    DB::insert("INSERT INTO category_product(product_id,category_id) VALUES (?,?)",[$product->id,$category]);
   }
 }
