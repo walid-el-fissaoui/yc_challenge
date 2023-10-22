@@ -9,9 +9,8 @@ use Illuminate\Database\Seeder;
 class CategorySeeder extends Seeder
 {
 
-    private $categoryRepository;
+    private CategoryRepository $categoryRepository;
     public function __construct(CategoryRepository $categoryRepository) {
-        $categoryRepository = new CategoryRepository;
         $this->categoryRepository = $categoryRepository;
     }
     /**
@@ -23,7 +22,7 @@ class CategorySeeder extends Seeder
     {
         $categories = Collect(['Cat1','Cat2','Cat3','Cat4']);
         $categories->each(function($category) {
-            $this->categoryRepository->create(['name' => $category]);
+            $this->categoryRepository->create([Category::NAME_COLUMN => $category]);
         });
     }
 }

@@ -14,7 +14,7 @@ class CategoryRepository
   }
 
   public function create(array $attributes): Category {
-    $attributes = Arr::only($attributes,['name']);
+    $attributes = Arr::only($attributes,[Category::NAME_COLUMN]);
     return Category::query()->create($attributes);
   }
 }
