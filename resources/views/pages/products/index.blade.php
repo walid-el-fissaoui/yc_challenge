@@ -16,7 +16,7 @@
       <select name="cat" class="form-control">
         <option value="0"></option>
         @foreach ($categories as $category)
-        <option value="{{$category->id}}">{{$category->name}}</option>
+        <option value="{{$category->getId()}}">{{$category->getName()}}</option>
         @endforeach
       </select>
     </div>
@@ -44,11 +44,11 @@
         <td>
           <img src="{{$product->getImage()}}" class="img-fluid" style="width: 50px" alt="product image">
         </td>
-        <td>{{$product->name}}</td>
-        <td>{{$product->description}}</td>
-        <td>{{$product->price}}</td>
-        <td>{{$product->category}}</td>
-        <td>{{$product->created_at->diffForHumans()}}</td>
+        <td>{{$product->getName()}}</td>
+        <td>{{$product->getDescription()}}</td>
+        <td>{{$product->getPrice()}}</td>
+        <td>{{$product->getCategory()}}</td>
+        <td>{{$product->getCreatedAt()}}</td>
       </tr>
     @endforeach
   </tbody>

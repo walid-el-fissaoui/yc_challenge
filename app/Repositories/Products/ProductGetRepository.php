@@ -47,7 +47,7 @@ class ProductGetRepository
 
   public function withCategoryName() {
     $this->products = $this->products->map(function($product) {
-      $product['category'] = $this->productCategoryRepository->getCategoryName($product);
+      $product[Product::CATEGORY_COLUMN] = $this->productCategoryRepository->getCategoryName($product);
       return $product;
     });
     return $this;

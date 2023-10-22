@@ -12,6 +12,7 @@ class Product extends Model
   public const DESCRIPTION_COLUMN = "description";
   public const PRICE_COLUMN = "price";
   public const IMAGE_COLUMN = "image";
+  public const CATEGORY_COLUMN = "category";
 
   protected $fillable = [
     self::ID_COLUMN,
@@ -40,5 +41,13 @@ class Product extends Model
 
   public function getImage() {
     return Storage::url($this->getAttribute(self::IMAGE_COLUMN));
+  }
+
+  public function getCreatedAt() {
+    return $this->created_at->diffForHumans();
+  }
+
+  public function getCategory() {
+    return $this->getAttribute(self::CATEGORY_COLUMN);
   }
 }
