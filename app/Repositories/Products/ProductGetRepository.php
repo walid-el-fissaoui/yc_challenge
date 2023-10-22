@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Products;
 
+use App\Models\CategoryProduct;
 use App\Models\Product;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -16,22 +17,26 @@ class ProductGetRepository
   }
 
   public function whereMinPrice(float $price) {
-    $this->products = $this->products->where('price','>=',$price);
+    $this->products = $this->products->where(Product::PRICE_COLUMN,'>=',$price);
     return $this;
   }
 
   public function whereMaxPrice(float $price) {
-    $this->products = $this->products->where('price','<=',$price);
+    $this->products = $this->products->where(Product::PRICE_COLUMN,'<=',$price);
     return $this;
   }
 
-  public function whereCategory(int $category) {
-    $products = Product::from("products as p")
-    ->select("p.*")
-    ->join("category_product as cp","cp.product_id","=",'p.id')
-    ->where("cp.category_id",$category)
-    ->get();
-    $this->products = $products;
+  public function whereCategory(int $categoryId) {
+    $query = sprintf("SELECT p.%s FROM products p INNER JOIN category_product cp ON cp.%s = p.%s WHERE cp.%s = ?",Product::ID_COLUMN,CategoryProduct::PRODUCT_ID_COLUMN,Product::ID_COLUMN,CategoryProduct::CATEGORY_ID_COLUMN);
+    $productsIdList = DB::SELECT($query,[$categoryId]);
+
+    $this->products = $this->products->filter(function(Product $product) use ($productsIdList){
+      foreach($productsIdList as $object) {
+        if($object->{Product::ID_COLUMN} === $product->getId()) {
+          return true;
+        }
+      }
+    });
     return $this;
   }
 
