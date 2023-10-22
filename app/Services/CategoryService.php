@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 class CategoryService
 {
 
-  private $categoryRepository;
+  private CategoryRepository $categoryRepository;
 
   public function __construct(CategoryRepository $categoryRepository) {
     $this->categoryRepository = $categoryRepository;

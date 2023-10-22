@@ -3,22 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ProductRepository;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    private $productService;
-    private $categoryService;
+    private ProductService $productService;
+    private CategoryService $categoryService;
 
     public function __construct(ProductService $productService,CategoryService $categoryService) {
-        $productRepository = new ProductRepository();
-        $categoryRepository = new CategoryRepository();
-        $productService = new ProductService($productRepository);
-        $categoryService = new CategoryService($categoryRepository);
         $this->productService = $productService;
         $this->categoryService = $categoryService;
     }

@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 class ProductService
 {
-  private $productRepository;
+  private ProductRepository $productRepository;
 
   public function __construct(ProductRepository $productRepository) {
     $this->productRepository = $productRepository;

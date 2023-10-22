@@ -24,7 +24,7 @@ class ProductCommand extends Command
      */
     protected $description = 'Command to create new product';
 
-    private $productService;
+    private ProductService $productService;
 
     /**
      * Create a new command instance.
@@ -34,8 +34,6 @@ class ProductCommand extends Command
     public function __construct(ProductService $productService)
     {
         parent::__construct();
-        $productRepository = new ProductRepository();
-        $productService = new ProductService($productRepository);
         $this->productService = $productService;
     }
 
