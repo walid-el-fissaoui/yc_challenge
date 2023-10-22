@@ -15,17 +15,7 @@ class ProductGetRepository
     $this->productCategoryRepository = $productCategoryRepository;
     $this->products = Collect([]);
   }
-
-  public function whereMinPrice(float $price) {
-    $this->products = $this->products->where(Product::PRICE_COLUMN,'>=',$price);
-    return $this;
-  }
-
-  public function whereMaxPrice(float $price) {
-    $this->products = $this->products->where(Product::PRICE_COLUMN,'<=',$price);
-    return $this;
-  }
-
+  
   public function whereCategory(int $categoryId) {
     $query = sprintf("SELECT p.%s FROM products p INNER JOIN category_product cp ON cp.%s = p.%s WHERE cp.%s = ?",Product::ID_COLUMN,CategoryProduct::PRODUCT_ID_COLUMN,Product::ID_COLUMN,CategoryProduct::CATEGORY_ID_COLUMN);
     $productsIdList = DB::SELECT($query,[$categoryId]);

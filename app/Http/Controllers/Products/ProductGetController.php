@@ -7,7 +7,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Services\Products\ProductGetService;
 
-class ProductGetJsonController extends Controller
+class ProductGetController extends Controller
 {
   private ProductGetService $productGetService;
 
