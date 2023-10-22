@@ -29,6 +29,10 @@ php artisan db:seed CategorySeeder
 ```
 php artisan storage:link
 ```
+7. Run laravel mix to generate assets:
+```
+npm run dev
+```
 
 # Features
 YouCan Coding Challenge includes the following features:

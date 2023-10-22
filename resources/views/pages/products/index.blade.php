@@ -6,12 +6,6 @@
     <div class="col-sm-2">
       <h3>Filter by price</h3>
     </div>
-    <div class="col-sm-2">
-      <input type="number" step="0.01" class="form-control" name="mip" placeholder="min">
-    </div>
-    <div class="col-sm-2">
-      <input type="number" step="0.01" class="form-control" name="map" placeholder="max">
-    </div>
     <div class="col-sm-3">
       <select name="cat" class="form-control">
         <option value="0"></option>
@@ -27,7 +21,7 @@
     </div>
   </div>
 </form>
-<table class="table">
+<table class="table" data-fetch="{{route('products.list')}}">
   <thead>
     <tr>
       <th>#</th>
@@ -39,18 +33,7 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($products as $product)
-      <tr>
-        <td>
-          <img src="{{$product->getImage()}}" class="img-fluid" style="width: 50px" alt="product image">
-        </td>
-        <td>{{$product->getName()}}</td>
-        <td>{{$product->getDescription()}}</td>
-        <td>{{$product->getPrice()}}</td>
-        <td>{{$product->getCategory()}}</td>
-        <td>{{$product->getCreatedAt()}}</td>
-      </tr>
-    @endforeach
+    
   </tbody>
 </table>
 @endsection

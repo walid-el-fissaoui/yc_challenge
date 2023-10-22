@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Product;
-use App\Services\ProductService;
+use App\Services\Products\ProductService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class ProductCommand extends Command

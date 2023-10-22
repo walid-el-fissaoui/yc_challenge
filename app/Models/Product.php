@@ -13,6 +13,7 @@ class Product extends Model
   public const PRICE_COLUMN = "price";
   public const IMAGE_COLUMN = "image";
   public const CATEGORY_COLUMN = "category";
+  public const CREATED_AT_COLUMN = "created_at";
 
   protected $fillable = [
     self::ID_COLUMN,
@@ -44,7 +45,7 @@ class Product extends Model
   }
 
   public function getCreatedAt() {
-    return $this->created_at->diffForHumans();
+    return $this->getAttribute(self::CREATED_AT_COLUMN)->diffForHumans();
   }
 
   public function getCategory() {
