@@ -29,7 +29,11 @@ php artisan db:seed CategorySeeder
 ```
 php artisan storage:link
 ```
-7. Run laravel mix to generate assets:
+7. Install frontend dependencies using the Node package manager (NPM):
+```
+npm run install
+```
+8. Compile assets using laravel Mix
 ```
 npm run dev
 ```

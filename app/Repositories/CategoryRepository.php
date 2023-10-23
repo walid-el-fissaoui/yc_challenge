@@ -8,13 +8,15 @@ use Illuminate\Support\Collection;
 
 class CategoryRepository
 {
+    public function getAll(): Collection
+    {
+        return Category::query()->get();
+    }
 
-  public function getAll(): Collection {
-    return Category::query()->get();
-  }
-
-  public function create(array $attributes): Category {
-    $attributes = Arr::only($attributes,[Category::NAME_COLUMN]);
-    return Category::query()->create($attributes);
-  }
+    public function create(array $attributes): Category
+    {
+        $attributes = Arr::only($attributes, [Category::NAME_COLUMN]);
+        
+        return Category::query()->create($attributes);
+    }
 }

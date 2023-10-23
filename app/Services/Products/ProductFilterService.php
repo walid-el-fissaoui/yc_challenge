@@ -7,19 +7,21 @@ use Illuminate\Support\Collection;
 
 class ProductFilterService
 {
-  private ProductGetRepository $productGetRepository;
+    private ProductGetRepository $productGetRepository;
 
-  public function __construct(ProductGetRepository $productGetRepository) {
-    $this->productGetRepository = $productGetRepository;
-  }
-
-  public function getFiltered(array $params): Collection {
-    $products = $this->productGetRepository->products()->getAll();
-    
-    if(isset($params['cat']) && $params['cat'] != 0) {
-      $products = $this->productGetRepository->products($products)->whereCategory($params["cat"])->withCategoryName()->getAll();
+    public function __construct(ProductGetRepository $productGetRepository)
+    {
+        $this->productGetRepository = $productGetRepository;
     }
-    return $products;
-  }
 
+    public function getFiltered(array $params): Collection
+    {
+        $products = $this->productGetRepository->products()->getAll();
+
+        if (isset($params['cat']) && $params['cat'] != 0) {
+            $products = $this->productGetRepository->products($products)->whereCategory($params["cat"])->withCategoryName()->getAll();
+        }
+        
+        return $products;
+    }
 }

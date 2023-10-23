@@ -7,16 +7,19 @@ use App\Services\CategoryService;
 
 class ProductIndexController extends Controller
 {
-  private CategoryService $categoryService;
+    private CategoryService $categoryService;
 
-  public function __construct(CategoryService $categoryService) {
-    $this->categoryService = $categoryService;
-  }
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
 
-  public function index() {
-    $categories = $this->categoryService->getAll();
-    return view('pages.products.index',[
-      'categories' => $categories
-    ]);
-  }
+    public function index()
+    {
+        $categories = $this->categoryService->getAll();
+        
+        return view('pages.products.index', [
+            'categories' => $categories
+        ]);
+    }
 }

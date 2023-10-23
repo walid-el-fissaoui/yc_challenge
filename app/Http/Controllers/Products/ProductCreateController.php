@@ -7,12 +7,17 @@ use App\Services\CategoryService;
 
 class ProductCreateController extends Controller
 {
-  private CategoryService $categoryService;
-  public function __construct(CategoryService $categoryService) {
-    $this->categoryService = $categoryService;
-  }
-  public function create() {
-    $categories = $this->categoryService->getAll();
-    return view("pages.products.create",['categories' => $categories]);
-  }
+    private CategoryService $categoryService;
+
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+    
+    public function create()
+    {
+        $categories = $this->categoryService->getAll();
+        
+        return view("pages.products.create", ['categories' => $categories]);
+    }
 }
